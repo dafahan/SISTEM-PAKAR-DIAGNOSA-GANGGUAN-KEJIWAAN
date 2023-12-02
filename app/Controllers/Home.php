@@ -4,6 +4,8 @@ namespace App\Controllers;
 use App\Models\GejalaModel;
 use App\Models\PenyakitModel;
 use App\Models\RuleModel;
+use App\Models\ArticleModel;
+
 
 class Home extends BaseController
 {
@@ -58,5 +60,24 @@ class Home extends BaseController
         ];
        
         return view('admin/daftar_rule',$data);
+    }
+    public function article(){
+        $articleModel = new ArticleModel();
+        $article = $articleModel->fetchData();
+        $data = [
+            'page' => 'article',
+            'article' => $article['hasPart'],
+        ];
+        return view('user/list_article',$data);
+    }
+    public function articleDetail($id){
+       
+        $articleModel = new ArticleModel();
+        $article = $articleModel->fetchData();
+        $data = [
+            'page' => 'article',
+            'article' => $article['hasPart'][$id],
+        ];
+        return view('user/article',$data);
     }
 }

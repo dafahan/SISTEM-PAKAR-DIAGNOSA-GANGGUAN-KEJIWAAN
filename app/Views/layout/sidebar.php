@@ -49,11 +49,13 @@
               <li class="<?php echo is_active('penyakit',$page); ?> nav-item"><a href="<?= base_url('penyakit'); ?>"><i class="feather icon-archive"></i><span class="menu-title" data-i18n="Gejala">Result Diagnosis</span></a>
             </li>
         </ul>
-
+      </li>
       
-
+      <li class="<?php echo is_active('article',$page); ?> nav-item"><a href="<?= base_url('article'); ?>"><i class="feather icon-book-open"></i><span class="menu-title" data-i18n="User ">Article</span></a>
+    </li>
+        
        <?php //if ($_SESSION['user']['id'] == 0): ?>
-            <li class="<?php //echo is_active('user'); ?> nav-item"><a href="?page=user"><i class="feather icon-monitor"></i><span class="menu-title" data-i18n="User ">User</span></a>
+            <li class="<?php //echo is_active('user'); ?> nav-item"><a href="?page=user"><i class="feather icon-monitor"></i><span class="menu-title" data-i18n="User ">User</span></a></li>
         <?php //endif; ?>
      
       <li class="nav-item"><a href="javascript:;"><i class="feather icon-pie-chart"></i><span class="menu-title" data-i18n="Laporan">Laporan</span></a>
