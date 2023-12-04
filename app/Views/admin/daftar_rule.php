@@ -10,7 +10,7 @@
         <div class="card-header">
           <h4 class="card-title">Rule</h4>
           
-          <a href="?page=tambah-obat" class="btn btn-primary round waves-effect waves-light">
+          <a href="<?= base_url('rule/add'); ?>" class="btn btn-primary round waves-effect waves-light">
             Tambah Rule
           </a>
           
@@ -38,8 +38,8 @@
                       <td>
                            <?php //if ($_SESSION['user']['id'] == 0): ?>
                             <div class="d-flex inline-flex">
-                        <a href="?page=edit-obat&id=<?= $dt['id_rule']; ?>"><i class="mx-1 feather icon-edit-2"></i></a>
-                        <a href="?page=hapus-obat&id=<?= $dt['id_rule']; ?>" class="btn-hapus"><i class="feather icon-trash"></i></a>
+                        <a href="rule/edit/<?= $dt['id_rule']; ?>"><i class="mx-1 feather icon-edit-2"></i></a>
+                        <a href="rule/delete/<?= $dt['id_rule']; ?>" class="btn-hapus"><i class="feather icon-trash"></i></a>
                            </div>
                         <?php //endif;?>
                       </td>

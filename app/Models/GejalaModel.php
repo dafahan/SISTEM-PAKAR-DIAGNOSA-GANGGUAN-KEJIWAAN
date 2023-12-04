@@ -64,4 +64,25 @@ class GejalaModel extends Model
     {
         return $this->delete($id);
     }
+
+
+    public function newKodeGejala()
+    {
+        $lastKodeGejala = $this->select('kode_gejala')
+                              ->orderBy('id_gejala', 'DESC')
+                              ->first();
+
+        if ($lastKodeGejala) {
+            $lastNumber = intval(substr($lastKodeGejala['kode_gejala'], 1));
+            $newNumber = $lastNumber + 1;
+            $newKodeGejala = 'G' . $newNumber;
+        } else {
+            // If no existing Kode Gejala, start with G1
+            $newKodeGejala = 'G1';
+        }
+
+        return $newKodeGejala;
+    }
+
 }
+

@@ -24,9 +24,9 @@ class RuleModel extends Model
 
     // Validation
     protected $validationRules      = [
-        'kode_rule'     => 'required|max_length[5]',
+        'kode_rule'     => 'required',
         'kode_gejala'   => 'required|max_length[1000]',
-        'kode_penyakit' => 'required|max_length[5]',
+        'kode_penyakit' => 'required',
     ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
@@ -64,5 +64,21 @@ class RuleModel extends Model
     public function deleteRule($id)
     {
         return $this->delete($id);
+    }
+    public function newKodeRule()
+    {
+        $lastKodeGejala = $this->select('kode_rule')
+                              ->orderBy('id_rule', 'DESC')
+                              ->first();
+
+        if ($lastKodeGejala) {
+            $lastNumber = intval(substr($lastKodeGejala['kode_rule'], 1));
+            $newNumber = $lastNumber + 1;
+            $newKodeGejala = 'R' . $newNumber;
+        } else {
+            $newKodeGejala = 'R1';
+        }
+
+        return $newKodeGejala;
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\GejalaModel;
 use App\Models\PenyakitModel;
 use App\Models\RuleModel;
 use App\Models\ArticleModel;
@@ -16,7 +15,7 @@ class Home extends BaseController
 
     public function dashboard()
     {   
-
+        
         $addon_script = ['assets/vendors/js/charts/apexcharts.min.js', 'assets/js/pages/dashboard.js'];
         $prepend_style = ['assets/css/pages/dashboard.css'];
 
@@ -29,49 +28,37 @@ class Home extends BaseController
 
         return view('admin/dashboard',$data);
     }
-    public function gejala(){
-        $GejalaModel = new GejalaModel();
-        $data = [
-          'gejala' =>  $GejalaModel->getGejala(),
-          'page' => 'gejala',
-            
-        ];
-        
-        return view('admin/daftar_gejala',$data);
-    }
+    
 
-    public function penyakit(){
-        $PenyakitModel = new PenyakitModel();
-        $data = [
-          'penyakit' =>  $PenyakitModel->getPenyakit(),
-          'page' => 'penyakit',
-            
-        ];
-       
-        return view('admin/daftar_penyakit',$data);
-    }
 
-    public function rule(){
-        $RuleModel = new RuleModel();
-        $data = [
-          'rule' =>  $RuleModel->getRule(),
-          'page' => 'rule',
-            
-        ];
-       
-        return view('admin/daftar_rule',$data);
-    }
-    public function article(){
-        $articleModel = new ArticleModel();
-        $article = $articleModel->fetchData();
-        $data = [
-            'page' => 'article',
-            'article' => $article['hasPart'],
-        ];
-        return view('user/list_article',$data);
-    }
+   
+    // ArticleController.php
+
+public function article(){
+    $articleModel = new ArticleModel();
+  
+    $perPage = 10;
+    $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
+    $article = $articleModel->fetchData();
+    $start = ($currentPage - 1) * $perPage;
+    $subset = array_slice($article['hasPart'], $start, $perPage);
+    $totalArticles = count($article['hasPart']);
+    $maxPages = ceil($totalArticles / $perPage);
+    $pager = \Config\Services::pager(null, null, false);
+    $pager->setPath('article'); 
+    $data = [
+        'page' => 'article',
+        'article' => $subset,
+        'pager' => $pager,
+        'currentPage' => $currentPage,
+        'maxPages' => $maxPages,
+    ];
+
+    return view('user/list_article', $data);
+}
+
     public function articleDetail($id){
-       
+
         $articleModel = new ArticleModel();
         $article = $articleModel->fetchData();
         $data = [

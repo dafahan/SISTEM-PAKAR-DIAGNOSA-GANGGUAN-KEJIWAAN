@@ -25,10 +25,7 @@ class PenyakitModel extends Model
     // Validation
     protected $validationRules      = [
         'kode_penyakit' => 'required|max_length[5]',
-        'nama_penyakit' => 'required|max_length[60]',
-        'penjelasan'    => 'required|max_length[5000]',
-        'gejala'        => 'required|max_length[5000]',
-        'penanganan'    => 'required|max_length[5000]',
+        'nama_penyakit' => 'required|max_length[200]',
     ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
@@ -47,7 +44,7 @@ class PenyakitModel extends Model
 
     public function savePenyakit($data)
     {
-        $this->insert($data);
+        return $this->insert($data);
     }
 
     public function getPenyakit($id = null)
@@ -74,5 +71,21 @@ class PenyakitModel extends Model
         }
         return $this->orWhereIn('kode_penyakit', $kodePenyakit)->get();
 
+    }
+    public function newKodePenyakit()
+    {
+        $lastKodeGejala = $this->select('kode_penyakit')
+                              ->orderBy('id_penyakit', 'DESC')
+                              ->first();
+
+        if ($lastKodeGejala) {
+            $lastNumber = intval(substr($lastKodeGejala['kode_penyakit'], 1));
+            $newNumber = $lastNumber + 1;
+            $newKodeGejala = 'P' . $newNumber;
+        } else {
+            $newKodeGejala = 'P1';
+        }
+
+        return $newKodeGejala;
     }
 }
