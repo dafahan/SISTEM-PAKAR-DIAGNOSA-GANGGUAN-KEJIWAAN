@@ -5,6 +5,7 @@ use App\Controllers\Home;
 use App\Controllers\Gejala;
 use App\Controllers\Penyakit;
 use App\Controllers\Rule;
+use App\Controllers\Diagnosis;
 /**
  * @var RouteCollection $routes
  */
@@ -20,8 +21,9 @@ $routes->post('/penyakit/?(:any)/?(:any)', [Penyakit::class,'prosess']);
 $routes->get('/rule/?(:any)/?(:any)', [Rule::class,'rule']);
 $routes->post('/rule/?(:any)/?(:any)', [Rule::class,'prosess']);
 
-$routes->get('/article', 'Home::article');
-$routes->get('/article/(:any)', [Home::class,'articleDetail']);
+$routes->get('/diagnosis/?(:any)/?(:any)', [Diagnosis::class,'index']);
+$routes->post('/diagnosis/?(:any)/?(:any)', [Diagnosis::class,'prosess']);
 
-$routes->get('diagnosis', 'Diagnosis::index');
-$routes->post('diagnosis', 'Diagnosis::process');
+$routes->get('/article/?(:any)/?(:any)', [Home::class,'article']);
+$routes->post('/article/?(:any)/?(:any)', [Home::class,'prosess']);
+

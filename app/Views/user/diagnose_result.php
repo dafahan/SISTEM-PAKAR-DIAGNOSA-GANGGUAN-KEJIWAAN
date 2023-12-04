@@ -27,7 +27,12 @@
                 <?php else: ?>
                     <p>The symptoms you give do not specifically indicate a mental diseases</p>
                 <?php endif; ?>
-
+                  <div class="d-flex justify-content-start mt-5 w-100" >
+                    <div class="d-flex justify-content-around w-50">
+                    <a href="<?= base_url('diagnosis');?>">Ulangi Diagnosis <i class="feather icon-arrow-left"></i></a>
+                    <a href="<?= base_url('diagnosis/result');?>">List Result <i class="feather icon-book"></i></a>
+                    </div>
+                  </div>
             </div>
           </div>
         </div>

@@ -30,6 +30,19 @@
 <!-- BEGIN: Custom CSS-->
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style.css'); ?>">
 <script src="<?= base_url('https://code.jquery.com/jquery-3.6.0.min.js'); ?>"></script>
-<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <!-- END: Custom CSS-->
+<link rel="stylesheet"
+          href= 
+"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" 
+          integrity= 
+"sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" 
+          crossorigin="anonymous" /> 
+    <link rel="stylesheet"
+          href= 
+"https://pro.fontawesome.com/releases/v5.10.0/css/all.css" 
+          integrity= 
+"sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+          crossorigin="anonymous" /> 

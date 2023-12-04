@@ -39,10 +39,11 @@
                         <label>Gejala</label>
                       </div>
                       <div class="col-md-8">
-                        <input type="text" placeholder="keterangan" class="form-control" name="gejala" <?php echo (empty($gejala))? '' : 'value="'.$gejala['gejala'].'"'; ?>required>
+                        <input type="text" placeholder="keterangan" class="form-control" name="gejala" <?php echo (empty($gejala))? '' : 'value="'.$gejala['gejala'].'"'; ?> required>
                       </div>
                     </div>
                   </div>
+
                   <div class="col-md-8 offset-md-4">
                     <button type="submit" class="btn btn-primary"><?php echo (empty($gejala))? 'CREATE' : 'SIMPAN' ?></button>
                   </div>

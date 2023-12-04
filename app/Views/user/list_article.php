@@ -21,7 +21,7 @@
                                         <div class="card-body">
                                             <h5 class="card-title"><h1 class="mb-1"><?= $a['headline'];?></h1></h5>
                                             <p class="card-text"><?= $a['description']?></p>
-                                            <a href="<?=base_url('article/'.$id++);?>" class="btn">Read More <i class="feather icon-eye"></i></a>
+                                            <a href="<?=base_url('article/detail/'.$id++);?>" class="btn">Read More <i class="feather icon-eye"></i></a>
                                         </div>
                                     </div>
                                 <?php
