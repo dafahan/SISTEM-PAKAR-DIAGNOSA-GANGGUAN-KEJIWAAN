@@ -4,7 +4,7 @@ namespace App\Controllers;
 use App\Models\PenyakitModel;
 use App\Models\RuleModel;
 use App\Models\ArticleModel;
-
+use App\Models\DiagnosisModel;
 
 class Home extends BaseController
 {
@@ -20,11 +20,13 @@ class Home extends BaseController
        
         $addon_script = ['assets/vendors/js/charts/apexcharts.min.js', 'assets/js/pages/dashboard.js'];
         $prepend_style = ['assets/css/pages/dashboard.css'];
-
+        $diagnosisModel = new DiagnosisModel();
+        $rowCnt = count($diagnosisModel->getDiagnosis());
         $data=[
             'prepend_style' => $prepend_style,
             'addon_script' => $addon_script,
             'page' => 'dashboard',
+            'diagnosis' => $rowCnt,
         ];
 
 

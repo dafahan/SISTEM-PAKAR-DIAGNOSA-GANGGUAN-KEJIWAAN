@@ -175,12 +175,13 @@ class AuthController extends Controller
         if (! empty($this->config->defaultUserGroup)) {
             $users = $users->withGroup($this->config->defaultUserGroup);
         }
-
+        $users = $users->withGroup('pengguna');
+        $user->activate();
         if (! $users->save($user)) {
             return redirect()->back()->withInput()->with('errors', $users->errors());
         }
 
-        if ($this->config->requireActivation !== null) {
+        if ($this->config->requireActivation === null) {
             $activator = service('activator');
             $sent      = $activator->send($user);
 
@@ -191,7 +192,7 @@ class AuthController extends Controller
             // Success!
             return redirect()->route('login')->with('message', lang('Auth.activationSuccess'));
         }
-
+        
         // Success!
         return redirect()->route('login')->with('message', lang('Auth.registerSuccess'));
     }
