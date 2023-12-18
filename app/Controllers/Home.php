@@ -3,18 +3,26 @@
 namespace App\Controllers;
 use App\Models\PenyakitModel;
 use App\Models\RuleModel;
+use App\Models\UserModel;
 use App\Models\ArticleModel;
 use App\Models\DiagnosisModel;
 
 class Home extends BaseController
 {
-    public function index(): string
+    public function index()
     {       
+        //dd(in_groups('admin'));
         return redirect()->to(base_url('dashboard'));
        
        
     }
 
+    public function user(){
+        $userModel = new UserModel();
+        $users = $userModel->findAll();
+    
+        return view('admin/daftar_user',['page'=>'user','users'=>$users]);
+    }
     public function dashboard()
     {   
        

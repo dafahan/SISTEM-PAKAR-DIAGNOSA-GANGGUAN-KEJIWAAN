@@ -175,7 +175,7 @@ class AuthController extends Controller
         if (! empty($this->config->defaultUserGroup)) {
             $users = $users->withGroup($this->config->defaultUserGroup);
         }
-        $users = $users->withGroup('pengguna');
+        $users = $users->withGroup('admin');
         $user->activate();
         if (! $users->save($user)) {
             return redirect()->back()->withInput()->with('errors', $users->errors());

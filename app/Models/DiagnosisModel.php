@@ -65,8 +65,16 @@ class DiagnosisModel extends Model
 
     public function saveDiagnosis($data)
     {   
-       
-        $this->insert($data);
+        try {
+            // Panggil metode insert di sini
+            $this->insert($data);
+            
+            // Jika eksekusi sampai di sini tanpa pengecualian, maka operasi berhasil
+           
+        } catch (Exception $e) {
+           
+        }
+        
     }
 
     public function getDiagnosis($id = null)

@@ -12,6 +12,8 @@ use App\Controllers\Diagnosis;
 $routes->get('/', 'Home::index');
 $routes->get('/dashboard', 'Home::dashboard');
 
+$routes->get('user','Home::user');
+
 $routes->get('/gejala/?(:any)/?(:any)', [Gejala::class,'gejala']);
 $routes->post('/gejala/?(:any)/?(:any)', [Gejala::class,'prosess']);
 

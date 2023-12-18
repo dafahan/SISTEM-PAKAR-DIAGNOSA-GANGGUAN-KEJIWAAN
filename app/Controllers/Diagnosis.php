@@ -60,6 +60,7 @@ class Diagnosis extends BaseController
             'user_id' => user_id(),
             'tanggal' => date("Y-m-d"),
         ];
+       
         $diagnosisModel->saveDiagnosis($diagnosa);
         return view('user/diagnose_result', $data);
     }

@@ -52,7 +52,10 @@
         </ul>
         
       </li>
-      
+      <?php if(in_groups('admin')):?>
+        <li class="<?php echo is_active('user',$page); ?> nav-item"><a href="<?= base_url('user'); ?>"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Laporan">User</span></a>
+      </li>
+        <?php endif;?>
 
       <?php if(in_groups('admin')):?>
         <li class="<?php echo is_active('manage',$page); ?> nav-item"><a href="<?= base_url('article/manage'); ?>"><i class="feather icon-settings"></i><span class="menu-title" data-i18n="Laporan">Manage Article</span></a>
