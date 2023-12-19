@@ -16,7 +16,9 @@
         </div>
         <div class="card-content">
           <div class="card-body">
+          
             <form action="<?= (empty($rule))? base_url('rule/add'):base_url('rule/edit/'.$rule['id_rule']); ?>" method="post">
+            <?= csrf_field() ?>
               <div class="form-body">
              
               <div class="row">

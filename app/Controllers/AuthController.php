@@ -11,7 +11,7 @@ use Myth\Auth\Models\UserModel;
 class AuthController extends Controller
 {
     protected $auth;
-
+    protected $skipCSRF = true;
     /**
      * @var AuthConfig
      */

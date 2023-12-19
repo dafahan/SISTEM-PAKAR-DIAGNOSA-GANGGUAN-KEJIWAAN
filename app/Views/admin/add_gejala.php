@@ -17,7 +17,9 @@
         </div>
         <div class="card-content">
           <div class="card-body">
-            <form action="<?= (empty($gejala))? base_url('gejala/add'):base_url('gejala/edit/'.$gejala['id_gejala']); ?>" method="post">
+            <form action="<?= (empty($gejala))? base_url('gejala/add'):base_url('gejala/edit/'.$gejala['id_gejala']); ?>" method="POST">
+            <?= csrf_field() ?>
+
               <div class="form-body">
     
                 <div class="row">

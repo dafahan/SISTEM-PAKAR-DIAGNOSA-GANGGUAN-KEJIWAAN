@@ -17,7 +17,8 @@
         </div>
         <div class="card-content">
           <div class="card-body">
-            <form action="<?= (empty($penyakit))? base_url('penyakit/add'):base_url('penyakit/edit/'.$penyakit['id_penyakit']); ?>" method="post">
+            <form action="<?= (empty($penyakit))? base_url('penyakit/add'):base_url('penyakit/edit/'.$penyakit['id_penyakit']); ?>" method="POST">
+            <?= csrf_field() ?>
               <div class="form-body">
     
                 <div class="row">
