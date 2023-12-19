@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 04, 2023 at 08:19 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: localhost:3306
+-- Generation Time: Dec 19, 2023 at 04:41 AM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,12 +28,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `auth_activation_attempts` (
-  `id` int(11) UNSIGNED NOT NULL,
+  `id` int UNSIGNED NOT NULL,
   `ip_address` varchar(255) NOT NULL,
   `user_agent` varchar(255) NOT NULL,
   `token` varchar(255) DEFAULT NULL,
   `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -42,10 +42,10 @@ CREATE TABLE `auth_activation_attempts` (
 --
 
 CREATE TABLE `auth_groups` (
-  `id` int(11) UNSIGNED NOT NULL,
+  `id` int UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `auth_groups`
@@ -62,9 +62,9 @@ INSERT INTO `auth_groups` (`id`, `name`, `description`) VALUES
 --
 
 CREATE TABLE `auth_groups_permissions` (
-  `group_id` int(11) UNSIGNED NOT NULL DEFAULT 0,
-  `permission_id` int(11) UNSIGNED NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `group_id` int UNSIGNED NOT NULL DEFAULT '0',
+  `permission_id` int UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -73,9 +73,9 @@ CREATE TABLE `auth_groups_permissions` (
 --
 
 CREATE TABLE `auth_groups_users` (
-  `group_id` int(11) UNSIGNED NOT NULL DEFAULT 0,
-  `user_id` int(11) UNSIGNED NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `group_id` int UNSIGNED NOT NULL DEFAULT '0',
+  `user_id` int UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `auth_groups_users`
@@ -83,6 +83,7 @@ CREATE TABLE `auth_groups_users` (
 
 INSERT INTO `auth_groups_users` (`group_id`, `user_id`) VALUES
 (1, 9),
+(1, 11),
 (2, 10);
 
 -- --------------------------------------------------------
@@ -92,13 +93,13 @@ INSERT INTO `auth_groups_users` (`group_id`, `user_id`) VALUES
 --
 
 CREATE TABLE `auth_logins` (
-  `id` int(11) UNSIGNED NOT NULL,
+  `id` int UNSIGNED NOT NULL,
   `ip_address` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `user_id` int(11) UNSIGNED DEFAULT NULL,
+  `user_id` int UNSIGNED DEFAULT NULL,
   `date` datetime NOT NULL,
   `success` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `auth_logins`
@@ -115,7 +116,12 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (8, '::1', 'dafahanid@gmail.com', 9, '2023-12-04 16:35:25', 1),
 (9, '::1', 'dafahanid@gmail.com', 9, '2023-12-04 17:15:43', 1),
 (10, '::1', 'dafahanreg@gmail.com', 10, '2023-12-04 17:16:02', 1),
-(11, '::1', 'dafahanid@gmail.com', 9, '2023-12-04 17:16:49', 1);
+(11, '::1', 'dafahanid@gmail.com', 9, '2023-12-04 17:16:49', 1),
+(12, '::1', 'admin', NULL, '2023-12-19 04:03:28', 0),
+(13, '::1', 'admin', NULL, '2023-12-19 04:03:36', 0),
+(14, '::1', 'admin', NULL, '2023-12-19 04:03:39', 0),
+(15, '::1', 'admin', NULL, '2023-12-19 04:03:43', 0),
+(16, '::1', 'admin@ad.min', 11, '2023-12-19 04:06:47', 1);
 
 -- --------------------------------------------------------
 
@@ -124,10 +130,10 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 --
 
 CREATE TABLE `auth_permissions` (
-  `id` int(11) UNSIGNED NOT NULL,
+  `id` int UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -136,13 +142,13 @@ CREATE TABLE `auth_permissions` (
 --
 
 CREATE TABLE `auth_reset_attempts` (
-  `id` int(11) UNSIGNED NOT NULL,
+  `id` int UNSIGNED NOT NULL,
   `email` varchar(255) NOT NULL,
   `ip_address` varchar(255) NOT NULL,
   `user_agent` varchar(255) NOT NULL,
   `token` varchar(255) DEFAULT NULL,
   `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -151,12 +157,12 @@ CREATE TABLE `auth_reset_attempts` (
 --
 
 CREATE TABLE `auth_tokens` (
-  `id` int(11) UNSIGNED NOT NULL,
+  `id` int UNSIGNED NOT NULL,
   `selector` varchar(255) NOT NULL,
   `hashedValidator` varchar(255) NOT NULL,
-  `user_id` int(11) UNSIGNED NOT NULL,
+  `user_id` int UNSIGNED NOT NULL,
   `expires` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -165,9 +171,9 @@ CREATE TABLE `auth_tokens` (
 --
 
 CREATE TABLE `auth_users_permissions` (
-  `user_id` int(11) UNSIGNED NOT NULL DEFAULT 0,
-  `permission_id` int(11) UNSIGNED NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `user_id` int UNSIGNED NOT NULL DEFAULT '0',
+  `permission_id` int UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -176,9 +182,9 @@ CREATE TABLE `auth_users_permissions` (
 --
 
 CREATE TABLE `diagnosis` (
-  `id` int(11) NOT NULL,
-  `user_id` int(10) UNSIGNED DEFAULT NULL,
-  `nama_penyakit` varchar(255) DEFAULT NULL,
+  `id` int NOT NULL,
+  `user_id` int UNSIGNED DEFAULT NULL,
+  `nama_penyakit` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `tanggal` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -196,12 +202,12 @@ INSERT INTO `diagnosis` (`id`, `user_id`, `nama_penyakit`, `tanggal`) VALUES
 --
 
 CREATE TABLE `gejala` (
-  `id_gejala` int(5) UNSIGNED NOT NULL,
+  `id_gejala` int UNSIGNED NOT NULL,
   `gejala` varchar(300) NOT NULL,
   `kode_gejala` varchar(5) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `gejala`
@@ -229,7 +235,8 @@ INSERT INTO `gejala` (`id_gejala`, `gejala`, `kode_gejala`, `created_at`, `updat
 (19, 'Mengalami rasa tidak enak di perut', 'G19', NULL, NULL),
 (20, 'Mudah lelah', 'G20', NULL, NULL),
 (21, 'Merasa kesulitan dalam pengendalian emosi, seperti mudah marah', 'G21', NULL, NULL),
-(22, 'Mengalami gangguan dalam berbicara, atau sering telat dalam berbicara', 'G22', NULL, '2023-12-03 14:36:48');
+(22, 'Mengalami gangguan dalam berbicara, atau sering telat dalam berbicara', 'G22', NULL, '2023-12-03 14:36:48'),
+(25, 'Tantrum Banget', 'G23', '2023-12-19 04:30:24', '2023-12-19 04:32:31');
 
 -- --------------------------------------------------------
 
@@ -238,14 +245,14 @@ INSERT INTO `gejala` (`id_gejala`, `gejala`, `kode_gejala`, `created_at`, `updat
 --
 
 CREATE TABLE `migrations` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `version` varchar(255) NOT NULL,
   `class` varchar(255) NOT NULL,
   `group` varchar(255) NOT NULL,
   `namespace` varchar(255) NOT NULL,
-  `time` int(11) NOT NULL,
-  `batch` int(11) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `time` int NOT NULL,
+  `batch` int UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `migrations`
@@ -262,7 +269,7 @@ INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`
 --
 
 CREATE TABLE `penyakit` (
-  `id_penyakit` int(5) UNSIGNED NOT NULL,
+  `id_penyakit` int UNSIGNED NOT NULL,
   `kode_penyakit` varchar(5) NOT NULL,
   `nama_penyakit` varchar(200) NOT NULL,
   `penjelasan` varchar(5000) NOT NULL,
@@ -270,7 +277,7 @@ CREATE TABLE `penyakit` (
   `penanganan` varchar(5000) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `penyakit`
@@ -294,13 +301,13 @@ INSERT INTO `penyakit` (`id_penyakit`, `kode_penyakit`, `nama_penyakit`, `penjel
 --
 
 CREATE TABLE `rule` (
-  `id_rule` int(5) UNSIGNED NOT NULL,
+  `id_rule` int UNSIGNED NOT NULL,
   `kode_rule` varchar(5) NOT NULL,
   `kode_gejala` varchar(1000) NOT NULL,
   `kode_penyakit` varchar(5) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `rule`
@@ -315,7 +322,8 @@ INSERT INTO `rule` (`id_rule`, `kode_rule`, `kode_gejala`, `kode_penyakit`, `cre
 (6, 'R6', 'G1 and G2 and G5 and G8 and G9 and G11 and G15 and G16 and G20', 'P6', NULL, NULL),
 (7, 'R7', 'G4 and G5 and G7 and G8 and G16', 'P7', NULL, NULL),
 (8, 'R8', 'G21 and G22', 'P8', NULL, NULL),
-(9, 'R9', 'G1 and G2 and G4 and G5 and G8 and G9 and G12 and G15 and G17 and G21', 'P9', NULL, NULL);
+(9, 'R9', 'G1 and G2 and G4 and G5 and G8 and G9 and G12 and G15 and G17 and G21', 'P9', NULL, NULL),
+(11, 'R10', 'G3 and G4', 'P1', '2023-12-19 04:28:20', '2023-12-19 04:33:41');
 
 -- --------------------------------------------------------
 
@@ -324,7 +332,7 @@ INSERT INTO `rule` (`id_rule`, `kode_rule`, `kode_gejala`, `kode_penyakit`, `cre
 --
 
 CREATE TABLE `users` (
-  `id` int(11) UNSIGNED NOT NULL,
+  `id` int UNSIGNED NOT NULL,
   `email` varchar(255) NOT NULL,
   `username` varchar(30) DEFAULT NULL,
   `password_hash` varchar(255) NOT NULL,
@@ -334,12 +342,12 @@ CREATE TABLE `users` (
   `activate_hash` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `status_message` varchar(255) DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT 0,
-  `force_pass_reset` tinyint(1) NOT NULL DEFAULT 0,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `force_pass_reset` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `users`
@@ -347,7 +355,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `email`, `username`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (9, 'dafahanid@gmail.com', 'dafahan', '$2y$10$cIJ9fCpecejiMU5xGumMlOWADKheBkERaB8iVsAVQqHmkSdi0o91K', NULL, NULL, NULL, '497e6ff7dd2864aecacea1f7c9effc0e', NULL, NULL, 1, 0, '2023-12-04 14:38:54', '2023-12-04 14:38:54', NULL),
-(10, 'dafahanreg@gmail.com', 'dafa', '$2y$10$CPNOUc/6Ez05wkURENmST.bNI.FhBcp3snzJUSy/7HOYfGCLLhQu.', NULL, NULL, NULL, '7f889594b45368df71b96bf1bc569896', NULL, NULL, 1, 0, '2023-12-04 16:30:31', '2023-12-04 16:30:31', NULL);
+(10, 'dafahanreg@gmail.com', 'dafa', '$2y$10$CPNOUc/6Ez05wkURENmST.bNI.FhBcp3snzJUSy/7HOYfGCLLhQu.', NULL, NULL, NULL, '7f889594b45368df71b96bf1bc569896', NULL, NULL, 1, 0, '2023-12-04 16:30:31', '2023-12-04 16:30:31', NULL),
+(11, 'admin@ad.min', 'admin', '$2y$10$YLx8OO7YTymaELNm2ZXCnOmqvdO6XIS2qPI1UPcifoyW/2orpO2UW', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-12-19 04:06:44', '2023-12-19 04:06:44', NULL);
 
 --
 -- Indexes for dumped tables
@@ -461,73 +470,73 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `auth_activation_attempts`
 --
 ALTER TABLE `auth_activation_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `auth_groups`
 --
 ALTER TABLE `auth_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
 --
 ALTER TABLE `auth_permissions`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `auth_reset_attempts`
 --
 ALTER TABLE `auth_reset_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `auth_tokens`
 --
 ALTER TABLE `auth_tokens`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `diagnosis`
 --
 ALTER TABLE `diagnosis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `gejala`
 --
 ALTER TABLE `gejala`
-  MODIFY `id_gejala` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_gejala` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `penyakit`
 --
 ALTER TABLE `penyakit`
-  MODIFY `id_penyakit` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_penyakit` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `rule`
 --
 ALTER TABLE `rule`
-  MODIFY `id_rule` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_rule` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
